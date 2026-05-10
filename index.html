@@ -446,7 +446,7 @@
     <p class="cta-eyebrow">El universo no espera</p>
     <h2 class="cta-title">Empieza a explorar<br />el cosmos <em>hoy.</em></h2>
     <p class="cta-sub">Cada noche despejada es una oportunidad que se va. Más de 4.000 clientes ya lo saben.</p>
-    <div class="cta-actions"><a href="#products" class="btn-primary btn-large">Ver telescopios <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><a href="#" class="btn-secondary btn-large">Hablar con un experto</a></div>
+    <div class="cta-actions"><a href="#products" class="btn-primary btn-large">Ver telescopios <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a><button class="btn-secondary btn-large" id="open-contact-modal">Hablar con un experto</button></div>
   </div></div>
 </section>
 
@@ -769,6 +769,173 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
 
   if(document.readyState==='complete') init();
   else window.addEventListener('load',init);
+})();
+</script>
+
+<!-- MODAL CONTACTO -->
+<div id="contact-modal" class="cm-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+  <div class="cm-box">
+    <button class="cm-close" id="cm-close" aria-label="Cerrar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="cm-header">
+      <p class="cm-eyebrow">E-EYE / Soporte</p>
+      <h2 class="cm-title" id="cm-title">Habla con<br />un experto</h2>
+      <p class="cm-sub">Cuéntanos en qué podemos ayudarte. Te respondemos en menos de 24 h.</p>
+    </div>
+    <form id="cm-form" class="cm-form" novalidate>
+      <div class="cm-field">
+        <label class="cm-label" for="cm-name">Nombre</label>
+        <input id="cm-name" class="cm-input" type="text" name="name" placeholder="Tu nombre completo" required autocomplete="name">
+      </div>
+      <div class="cm-field">
+        <label class="cm-label" for="cm-email">Email</label>
+        <input id="cm-email" class="cm-input" type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+      </div>
+      <div class="cm-field">
+        <label class="cm-label" for="cm-subject">Tema</label>
+        <select id="cm-subject" class="cm-input cm-select" name="subject">
+          <option value="Consulta sobre telescopios">Consulta sobre telescopios</option>
+          <option value="Asesoramiento de compra">Asesoramiento de compra</option>
+          <option value="Soporte técnico">Soporte técnico</option>
+          <option value="Estado de pedido">Estado de pedido</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+      <div class="cm-field">
+        <label class="cm-label" for="cm-message">Mensaje</label>
+        <textarea id="cm-message" class="cm-input cm-textarea" name="message" placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+      </div>
+      <button type="submit" class="cm-submit">
+        Enviar mensaje
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+    <div id="cm-success" class="cm-success" hidden>
+      <div class="cm-success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+      </div>
+      <h3 class="cm-success-title">¡Mensaje enviado!</h3>
+      <p class="cm-success-text">Tu mensaje ha llegado correctamente. Te responderemos en menos de 24 horas.</p>
+      <button class="cm-submit" id="cm-close-success">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* === MODAL CONTACTO === */
+.cm-backdrop{position:fixed;inset:0;background:rgba(3,3,10,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:10000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+.cm-backdrop.is-open{opacity:1;visibility:visible}
+.cm-box{position:relative;background:linear-gradient(145deg,#0d0d1a,#111128);border:1px solid rgba(0,212,255,.15);border-radius:16px;padding:48px 44px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.cm-backdrop.is-open .cm-box{transform:translateY(0) scale(1)}
+.cm-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.cm-close:hover{background:rgba(0,212,255,.15);border-color:rgba(0,212,255,.4)}
+.cm-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan,#00d4ff);margin-bottom:12px;text-transform:uppercase}
+.cm-title{font-size:clamp(26px,4vw,34px);font-weight:700;line-height:1.15;margin-bottom:12px}
+.cm-sub{font-size:15px;font-weight:300;color:rgba(248,250,252,.6);line-height:1.6;margin-bottom:36px}
+.cm-form{display:flex;flex-direction:column;gap:20px}
+.cm-field{display:flex;flex-direction:column;gap:8px}
+.cm-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;color:rgba(248,250,252,.5);text-transform:uppercase}
+.cm-input{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px;color:#f8fafc;font-size:15px;font-family:inherit;outline:none;transition:border-color .2s,background .2s;width:100%;box-sizing:border-box}
+.cm-input::placeholder{color:rgba(248,250,252,.3)}
+.cm-input:focus{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.04)}
+.cm-input.is-error{border-color:rgba(239,68,68,.6)}
+.cm-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(248,250,252,0.4)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer}
+.cm-select option{background:#111128;color:#f8fafc}
+.cm-textarea{resize:vertical;min-height:110px}
+.cm-submit{margin-top:4px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 28px;background:var(--cyan,#00d4ff);color:#03030a;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s,transform .15s}
+.cm-submit:hover{opacity:.88;transform:translateY(-1px)}
+.cm-submit:active{transform:translateY(0)}
+.cm-success{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:20px 0}
+.cm-success[hidden]{display:none}
+.cm-success-icon{width:64px;height:64px;border-radius:50%;background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.3);display:flex;align-items:center;justify-content:center;color:var(--cyan,#00d4ff)}
+.cm-success-title{font-size:26px;font-weight:700}
+.cm-success-text{font-size:15px;color:rgba(248,250,252,.6);line-height:1.6;max-width:340px}
+.cm-error-msg{color:rgba(239,68,68,.85);font-size:14px;text-align:center;margin-top:4px}
+</style>
+
+<script>
+(function(){
+  var backdrop=document.getElementById('contact-modal');
+  var openBtn=document.getElementById('open-contact-modal');
+  var closeBtn=document.getElementById('cm-close');
+  var form=document.getElementById('cm-form');
+  var successPanel=document.getElementById('cm-success');
+  var closeSuccess=document.getElementById('cm-close-success');
+
+  function openModal(){
+    backdrop.classList.add('is-open');
+    backdrop.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+    setTimeout(function(){closeBtn.focus()},350);
+  }
+  function closeModal(){
+    backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+    form.reset();
+    form.hidden=false;
+    successPanel.hidden=true;
+    form.querySelectorAll('.is-error').forEach(function(el){el.classList.remove('is-error')});
+  }
+
+  openBtn.addEventListener('click',openModal);
+  closeBtn.addEventListener('click',closeModal);
+  closeSuccess.addEventListener('click',closeModal);
+  backdrop.addEventListener('click',function(e){if(e.target===backdrop)closeModal()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&backdrop.classList.contains('is-open'))closeModal()});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=document.getElementById('cm-name').value.trim();
+    var email=document.getElementById('cm-email').value.trim();
+    var subject=document.getElementById('cm-subject').value;
+    var message=document.getElementById('cm-message').value.trim();
+    var valid=true;
+    [['cm-name',name],['cm-email',email],['cm-message',message]].forEach(function(pair){
+      var el=document.getElementById(pair[0]);
+      if(!pair[1]){el.classList.add('is-error');valid=false;}
+      else el.classList.remove('is-error');
+    });
+    if(!valid)return;
+
+    var submitBtn=form.querySelector('.cm-submit');
+    submitBtn.disabled=true;
+    submitBtn.textContent='Enviando…';
+
+    fetch('https://formsubmit.co/ajax/dbenitezcanov01@iesalbarregas.es',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        name:name,
+        email:email,
+        _subject:'[E-EYE] '+subject+' — '+name,
+        message:message,
+        _captcha:'false',
+        _template:'table'
+      })
+    })
+    .then(function(r){return r.json()})
+    .then(function(data){
+      if(data.success==='true'||data.success===true){
+        form.hidden=true;
+        successPanel.hidden=false;
+      } else {
+        throw new Error('error');
+      }
+    })
+    .catch(function(){
+      submitBtn.disabled=false;
+      submitBtn.textContent='Enviar mensaje';
+      var err=form.querySelector('.cm-error-msg');
+      if(!err){
+        err=document.createElement('p');
+        err.className='cm-error-msg';
+        err.textContent='Hubo un error al enviar. Inténtalo de nuevo.';
+        form.appendChild(err);
+      }
+    });
+  });
 })();
 </script>
 </body>
