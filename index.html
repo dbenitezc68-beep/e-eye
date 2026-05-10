@@ -23,8 +23,8 @@
     ::-webkit-scrollbar-thumb{background:rgba(0,212,255,.3)}::-webkit-scrollbar-thumb:hover{background:var(--cyan)}
 
     /* CURSOR */
-    .cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:difference;transition:transform .12s var(--ease-out)}
-    .cursor-ring{position:fixed;top:0;left:0;width:40px;height:40px;border:1px solid rgba(0,212,255,.5);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .35s var(--ease-out),width .3s,height .3s}
+    .cursor{position:fixed;top:0;left:0;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;mix-blend-mode:difference;transition:transform .12s var(--ease-out)}
+    .cursor-ring{position:fixed;top:0;left:0;width:40px;height:40px;border:1px solid rgba(0,212,255,.5);border-radius:50%;pointer-events:none;z-index:99998;transition:transform .35s var(--ease-out),width .3s,height .3s}
     .cursor.hov{transform:translate(-50%,-50%) scale(1.8)}.cursor-ring.hov{width:70px;height:70px;border-color:var(--cyan)}
 
     /* SCROLL PROGRESS */
@@ -116,9 +116,11 @@
     .product-card.featured .product-desc{font-size:16px;max-width:420px}
 
     /* 3D CANVAS */
-    .scope-canvas-wrap{position:absolute;inset:0;overflow:hidden;cursor:grab}
-    .scope-canvas-wrap:active{cursor:grabbing}
-    .scope-canvas-wrap canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+    .scope-viewer{position:absolute;inset:0;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,#0c1826 0%,#05080e 100%)}
+    .scope-photo{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;object-position:center;filter:drop-shadow(0 12px 40px rgba(0,0,0,.95)) drop-shadow(0 0 24px rgba(0,212,255,.07));image-rendering:-webkit-optimize-contrast}
+    .scope-photo--scene{inset:0;width:100%;height:100%;object-fit:cover;filter:none}
+    .scope-canvas-wrap{position:absolute;inset:0;overflow:hidden}
+    .scope-canvas-wrap canvas{display:block;position:absolute;inset:0;width:100%!important;height:100%!important}
     .scope-loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--grey-dim);font-family:var(--font-mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;z-index:2;pointer-events:none}
     .scope-loader.hidden{display:none}
     .scope-drag-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:9px;letter-spacing:.25em;color:rgba(148,163,184,.5);text-transform:uppercase;pointer-events:none;z-index:3;opacity:0;white-space:nowrap;transition:opacity .4s}
@@ -248,6 +250,10 @@
     <li><a href="#experience">Experiencia</a></li>
     <li><a href="#reviews">Reseñas</a></li>
   </ul>
+  <button class="nav-cart" id="nav-cart" aria-label="Carrito de compra">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cart-badge" id="cart-badge"></span>
+  </button>
 </nav>
 
 <section id="hero">
@@ -306,7 +312,7 @@
 
     <div class="product-card featured reveal stagger-1">
       <div class="product-img-wrap">
-        <div class="scope-canvas-wrap" id="canvas-cosmos"><div class="scope-loader" id="loader-cosmos">Iniciando modelo…</div><div class="scope-drag-hint">Arrastra para rotar</div></div>
+        <div class="scope-viewer" id="viewer-cosmos"><img class="scope-photo" src="assets/cosmos-refractor.png" alt="E-EYE Cosmos Pro 120"></div>
         <div class="product-badge">Más vendido</div>
       </div>
       <div class="product-info">
@@ -314,13 +320,13 @@
         <h3 class="product-name">E-EYE Cosmos Pro 120</h3>
         <p class="product-desc">El telescopio refractor apocromático más vendido. Con 120mm y óptica ED de triple elemento, ofrece imágenes de claridad sin igual tanto en observación planetaria como en astrofotografía.</p>
         <div class="product-specs"><span class="spec-chip">120mm APO</span><span class="spec-chip">F/7.5</span><span class="spec-chip">GoTo</span><span class="spec-chip">USB-C</span></div>
-        <div class="product-footer"><div class="product-price"><small>Desde</small>2.890 €</div><a href="#" class="btn-product">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        <div class="product-footer"><div class="product-price"><small>Desde</small>2.890 €</div><button class="btn-product" data-product="cosmos">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
     <div class="product-card reveal stagger-2">
       <div class="product-img-wrap">
-        <div class="scope-canvas-wrap" id="canvas-nova"><div class="scope-loader" id="loader-nova">Iniciando modelo…</div><div class="scope-drag-hint">Arrastra para rotar</div></div>
+        <div class="scope-viewer" id="viewer-nova"><img class="scope-photo" src="assets/nova-newton.png" alt="E-EYE Nova 8&quot;"></div>
         <div class="product-badge new">Nuevo</div>
       </div>
       <div class="product-info">
@@ -328,26 +334,26 @@
         <h3 class="product-name">E-EYE Nova 8"</h3>
         <p class="product-desc">Reflector newtoniano de 200mm para observación visual y fotografía de campo profundo. Montura ecuatorial motorizada.</p>
         <div class="product-specs"><span class="spec-chip">200mm</span><span class="spec-chip">F/5</span><span class="spec-chip">EQ6</span></div>
-        <div class="product-footer"><div class="product-price">1.490 €</div><a href="#" class="btn-product">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        <div class="product-footer"><div class="product-price">1.490 €</div><button class="btn-product" data-product="nova">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
     <div class="product-card reveal stagger-3">
       <div class="product-img-wrap">
-        <div class="scope-canvas-wrap" id="canvas-apex"><div class="scope-loader" id="loader-apex">Iniciando modelo…</div><div class="scope-drag-hint">Arrastra para rotar</div></div>
+        <div class="scope-viewer" id="viewer-apex"><img class="scope-photo" src="assets/apex-sct.png" alt="E-EYE Apex SC 11&quot;"></div>
       </div>
       <div class="product-info">
         <div class="product-cat">Schmidt-Cassegrain</div>
         <h3 class="product-name">E-EYE Apex SC 11"</h3>
         <p class="product-desc">280mm de apertura en un tubo compacto. Rendimiento de observatorio, portabilidad de mochila. GoTo WiFi integrado.</p>
         <div class="product-specs"><span class="spec-chip">280mm</span><span class="spec-chip">F/10</span><span class="spec-chip">WiFi</span></div>
-        <div class="product-footer"><div class="product-price">3.250 €</div><a href="#" class="btn-product">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        <div class="product-footer"><div class="product-price">3.250 €</div><button class="btn-product" data-product="apex">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
     <div class="product-card reveal stagger-4">
       <div class="product-img-wrap">
-        <div class="scope-canvas-wrap" id="canvas-zenith"><div class="scope-loader" id="loader-zenith">Iniciando modelo…</div><div class="scope-drag-hint">Arrastra para rotar</div></div>
+        <div class="scope-viewer" id="viewer-zenith"><img class="scope-photo" src="assets/zenith-rc.png" alt="E-EYE Zenith 12&quot;"></div>
         <div class="product-badge sale">−20%</div>
       </div>
       <div class="product-info">
@@ -355,13 +361,13 @@
         <h3 class="product-name">E-EYE Zenith 12"</h3>
         <p class="product-desc">La mayor apertura de nuestra gama. 300mm de luz capturada, montura Dobson GoTo con app integrada.</p>
         <div class="product-specs"><span class="spec-chip">300mm</span><span class="spec-chip">F/4.9</span><span class="spec-chip">App</span></div>
-        <div class="product-footer"><div class="product-price"><small><s style="color:var(--grey-dim);font-size:16px">1.990 €</s></small>1.592 €</div><a href="#" class="btn-product">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        <div class="product-footer"><div class="product-price"><small><s style="color:var(--grey-dim);font-size:16px">1.990 €</s></small>1.592 €</div><button class="btn-product" data-product="zenith">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
     <div class="product-card reveal stagger-5">
       <div class="product-img-wrap">
-        <div class="scope-canvas-wrap" id="canvas-stellar"><div class="scope-loader" id="loader-stellar">Iniciando modelo…</div><div class="scope-drag-hint">Arrastra para rotar</div></div>
+        <div class="scope-viewer" id="viewer-stellar"><img class="scope-photo" src="assets/stellar-evscope.png" alt="E-EYE Stellar 70"></div>
         <div class="product-badge" style="background:var(--purple);color:white">Iniciación</div>
       </div>
       <div class="product-info">
@@ -369,7 +375,7 @@
         <h3 class="product-name">E-EYE Stellar 70</h3>
         <p class="product-desc">El punto de partida perfecto. 70mm APO en montura AZ manual. Compacto, portátil y con la misma calidad óptica que el resto de la gama.</p>
         <div class="product-specs"><span class="spec-chip">70mm</span><span class="spec-chip">F/6</span><span class="spec-chip">AZ</span></div>
-        <div class="product-footer"><div class="product-price">490 €</div><a href="#" class="btn-product">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
+        <div class="product-footer"><div class="product-price">490 €</div><button class="btn-product" data-product="stellar">Ver producto <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
       </div>
     </div>
 
@@ -627,28 +633,40 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
     if(loader)loader.classList.add('hidden');
   }
 
-  /* ══ MODELO 1: Refractor APO (Cosmos) ══ */
+  /* ══ MODELO 1: Sky-Watcher Esprit 120ED Pro (Cosmos) ══ */
   function buildRefractor(){
     var g=new THREE.Group(),P=Math.PI/2;
-    var tC=0x1e2228,tuC=0xf0ede4,ac=0xc9a86a;
-    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2;var leg=new THREE.Mesh(new THREE.CylinderGeometry(.06,.04,3.2,16),mM(tC,.4,.85));leg.position.set(Math.cos(a)*.9,-1.3,Math.sin(a)*.9);leg.rotation.z=-Math.cos(a)*.28;leg.rotation.x=Math.sin(a)*.28;g.add(leg);var foot=new THREE.Mesh(new THREE.CylinderGeometry(.09,.12,.1,16),mPl(0x111111));foot.position.set(Math.cos(a)*1.4,-2.45,Math.sin(a)*1.4);g.add(foot)}
-    var col=new THREE.Mesh(new THREE.CylinderGeometry(.1,.12,.8,24),mM(tC,.35,.9));col.position.y=.3;g.add(col);
-    var raH=new THREE.Mesh(new THREE.CylinderGeometry(.32,.32,.8,24),mM(tC,.35,.9));raH.rotation.z=P/2;raH.position.y=.85;g.add(raH);
-    var decH=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,.9,24),mM(tC,.35,.9));decH.rotation.x=P;decH.rotation.z=P/2+P;decH.position.set(.32,1.1,0);g.add(decH);
-    var cwB=new THREE.Mesh(new THREE.CylinderGeometry(.04,.04,1.4,12),mM(0xcccccc,.25,.95));cwB.position.set(-.3,.5,0);cwB.rotation.z=P/2+P;g.add(cwB);
-    var cw=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.3,24),mM(0x1a1a1a,.4,.85));cw.position.set(-.85,.05,0);cw.rotation.z=P/2+P;g.add(cw);
-    var ota=new THREE.Group(),tL=3.2,tR=.28;
-    var tubeMain=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,32),mP(tuC,.35));tubeMain.rotation.z=P;ota.add(tubeMain);
-    var dew=new THREE.Mesh(new THREE.CylinderGeometry(tR+.05,tR+.05,.4,32),mP(tuC,.35));dew.rotation.z=P;dew.position.x=tL/2+.4;ota.add(dew);
-    var cell=new THREE.Mesh(new THREE.CylinderGeometry(tR+.04,tR+.04,.25,32),mM(0x1a1a1a,.35,.9));cell.rotation.z=P;cell.position.x=tL/2+.1;ota.add(cell);
-    var lens=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,.05,32),mG(0x4a7090));lens.rotation.z=P;lens.position.x=tL/2+.2;ota.add(lens);
-    for(var k=0;k<3;k++){var rng=new THREE.Mesh(new THREE.CylinderGeometry(tR+.005,tR+.005,.04,32),mM(ac,.3,.9));rng.rotation.z=P;rng.position.x=-1+k*.6;ota.add(rng)}
-    for(var c=0;c<2;c++){var cl=new THREE.Mesh(new THREE.TorusGeometry(tR+.06,.05,12,32),mM(0x303030,.35,.9));cl.rotation.y=P;cl.position.x=-.5+c*1;ota.add(cl)}
-    var fb=new THREE.Mesh(new THREE.BoxGeometry(.5,.45,.45),mM(0x2a2a2a,.4,.85));fb.position.set(-tL/2-.15,0,.32);ota.add(fb);
-    var dt=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.4,24),mM(0xc0c0c0,.2,.95));dt.position.set(-tL/2-.15,0,.65);ota.add(dt);
-    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.09,.09,.18,24),mM(0x111111,.4,.85));ep.position.set(-tL/2-.15,0,.93);ota.add(ep);
-    var fs=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,.7,16),mM(0x111111,.4,.9));fs.rotation.z=P;fs.position.set(.5,.4,0);ota.add(fs);
-    ota.position.set(.32,1.1,0);ota.rotation.z=-.35;g.add(ota);g.position.y=-.2;return g;
+    var white=mP(0xeeeae4,.28);var dk=mM(0x111214,.5,.8);var silver=mM(0xb4bbc4,.2,.95);var mntDk=mM(0x1e2126,.42,.82);
+    /* Tripod — vector orientation, legs converge at y=0 */
+    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2;var fx=Math.cos(a)*1.35,fz=Math.sin(a)*1.35;var dv=new THREE.Vector3(fx,-2.55,fz);var lL=dv.length();dv.normalize();var leg=new THREE.Mesh(new THREE.CylinderGeometry(.044,.058,lL,12),silver);leg.position.set(fx/2,-1.275,fz/2);leg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dv);g.add(leg);var foot=new THREE.Mesh(new THREE.CylinderGeometry(.068,.088,.08,10),dk);foot.position.set(fx,-2.55,fz);g.add(foot)}
+    var spr=new THREE.Mesh(new THREE.TorusGeometry(.86,.018,8,48),silver);spr.position.y=-1.62;spr.rotation.x=P;g.add(spr);
+    /* Pier: bottom at y=0, top at y=.35 */
+    var pier=new THREE.Mesh(new THREE.CylinderGeometry(.15,.19,.35,24),mntDk);pier.position.y=.175;g.add(pier);
+    /* EQ6 mount body: bottom at y=.35 */
+    var mBody=new THREE.Mesh(new THREE.BoxGeometry(.6,.38,.5),mntDk);mBody.position.y=.54;g.add(mBody);
+    /* RA axis — horizontal disc at y=.68 */
+    var ra=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.14,32),mntDk);ra.rotation.z=P;ra.position.set(-.2,.68,0);g.add(ra);
+    /* Counterweight shaft — VERTICAL, hangs down from RA left side */
+    var cwS=new THREE.Mesh(new THREE.CylinderGeometry(.027,.027,1.6,12),silver);cwS.position.set(-.32,.68-.8,0);g.add(cwS);
+    var cw=new THREE.Mesh(new THREE.CylinderGeometry(.23,.23,.3,28),mM(0x242424,.35,.9));cw.position.set(-.32,.68-1.42,0);g.add(cw);
+    /* DEC connection disc + vertical housing rising from RA right side */
+    /* DEC: horizontal arm connecting RA to vertical housing */
+    var decArm=new THREE.Mesh(new THREE.BoxGeometry(.32,.2,.2),mntDk);decArm.position.set(.14,.68,0);g.add(decArm);
+    var decH=new THREE.Mesh(new THREE.CylinderGeometry(.22,.22,.56,24),mntDk);decH.position.set(.28,.98,0);g.add(decH);
+    var saddle=new THREE.Mesh(new THREE.BoxGeometry(.38,.08,.28),silver);saddle.position.set(.28,1.28,0);g.add(saddle);
+    /* OTA — long white APO tube */
+    var ota=new THREE.Group(),tL=3.6,tR=.21;
+    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,36),white);tube.rotation.z=P;ota.add(tube);
+    var dew=new THREE.Mesh(new THREE.CylinderGeometry(tR+.052,tR+.052,.52,36),white);dew.rotation.z=P;dew.position.x=tL/2+.26;ota.add(dew);
+    var front=new THREE.Mesh(new THREE.CylinderGeometry(tR+.062,tR+.062,.08,36),dk);front.rotation.z=P;front.position.x=tL/2+.52;ota.add(front);
+    var lens=new THREE.Mesh(new THREE.CylinderGeometry(tR+.01,tR+.01,.025,36),mG(0x4477aa));lens.rotation.z=P;lens.position.x=tL/2+.5;ota.add(lens);
+    for(var r=0;r<3;r++){var rng=new THREE.Mesh(new THREE.CylinderGeometry(tR+.002,tR+.002,.044,36),dk);rng.rotation.z=P;rng.position.x=-1.1+r*1.05;ota.add(rng)}
+    for(var c=0;c<2;c++){var cl=new THREE.Mesh(new THREE.TorusGeometry(tR+.055,.05,10,36),dk);cl.rotation.y=P;cl.position.x=-.42+c*1.1;ota.add(cl)}
+    var fBox=new THREE.Mesh(new THREE.BoxGeometry(.24,.19,.19),dk);fBox.position.set(-tL/2-.05,0,.28);ota.add(fBox);
+    var fTube=new THREE.Mesh(new THREE.CylinderGeometry(.062,.062,.4,16),dk);fTube.position.set(-tL/2-.05,0,.52);ota.add(fTube);
+    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.058,.058,.18,16),dk);ep.position.set(-tL/2-.05,0,.8);ota.add(ep);
+    var fin=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,.48,10),dk);fin.rotation.z=P;fin.position.set(-.28,tR+.1,0);ota.add(fin);
+    ota.position.set(.28,1.28,0);ota.rotation.z=-.35;g.add(ota);g.position.y=-.18;return g;
   }
 
   /* ══ MODELO 2: URSA N-150 (Newtoniano) ══ */
@@ -679,92 +697,116 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
     ota.position.set(.3,1.2,0);ota.rotation.z=-.3;g.add(ota);g.position.y=-.2;return g;
   }
 
-  /* ══ MODELO 3: Schmidt-Cassegrain (Apex) ══ */
+  /* ══ MODELO 3: Celestron CGX-L 1400 XLT (Apex) ══ */
   function buildSCT(){
     var g=new THREE.Group(),P=Math.PI/2;
-    var bC=0xe8e3d6,dk=0x1a1a1a,ac=0x6b8caf;
-    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2;var leg=new THREE.Mesh(new THREE.CylinderGeometry(.07,.05,3,16),mM(0x2a2a2a,.4,.85));leg.position.set(Math.cos(a)*.95,-1.2,Math.sin(a)*.95);leg.rotation.z=-Math.cos(a)*.3;leg.rotation.x=Math.sin(a)*.3;g.add(leg);var foot=new THREE.Mesh(new THREE.CylinderGeometry(.1,.13,.1,16),mPl(0x111111));foot.position.set(Math.cos(a)*1.45,-2.4,Math.sin(a)*1.45);g.add(foot)}
-    var tH=new THREE.Mesh(new THREE.CylinderGeometry(.2,.25,.3,24),mM(0x222222,.4,.9));tH.position.y=.4;g.add(tH);
-    var base=new THREE.Mesh(new THREE.BoxGeometry(.7,.4,.7),mP(bC,.4));base.position.y=.65;g.add(base);
-    var str=new THREE.Mesh(new THREE.BoxGeometry(.72,.04,.72),mP(ac,.4));str.position.y=.49;g.add(str);
-    var aG=new THREE.BoxGeometry(.2,1.4,.55);
-    var lA=new THREE.Mesh(aG,mP(bC,.4));lA.position.set(-.55,1.55,0);g.add(lA);
-    var rA=new THREE.Mesh(aG,mP(bC,.4));rA.position.set(.55,1.55,0);g.add(rA);
-    var panel=new THREE.Mesh(new THREE.BoxGeometry(.04,.5,.35),mPl(0x111111));panel.position.set(.67,1.4,0);g.add(panel);
-    var scr2=new THREE.Mesh(new THREE.PlaneGeometry(.22,.12),new THREE.MeshStandardMaterial({color:0x88aaff,emissive:0x224466,roughness:.2,metalness:.1}));scr2.position.set(.69,1.5,0);scr2.rotation.y=P;g.add(scr2);
-    var ota=new THREE.Group(),tL=.95,tR=.42;
-    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,48),mP(bC,.4));tube.rotation.z=P;ota.add(tube);
-    var fH=new THREE.Mesh(new THREE.CylinderGeometry(tR+.02,tR+.02,.12,48),mM(dk,.4,.9));fH.rotation.z=P;fH.position.x=tL/2+.06;ota.add(fH);
-    var corr=new THREE.Mesh(new THREE.CylinderGeometry(tR-.01,tR-.01,.02,48),mG(0x99bbcc));corr.rotation.z=P;corr.position.x=tL/2+.07;ota.add(corr);
-    var sH2=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.08,24),mM(dk,.4,.9));sH2.rotation.z=P;sH2.position.x=tL/2+.11;ota.add(sH2);
-    var bP=new THREE.Mesh(new THREE.CylinderGeometry(tR+.02,tR+.02,.12,48),mM(dk,.4,.9));bP.rotation.z=P;bP.position.x=-tL/2-.06;ota.add(bP);
-    var vB=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,.18,24),mM(dk,.4,.9));vB.rotation.z=P;vB.position.x=-tL/2-.21;ota.add(vB);
-    var db=new THREE.Mesh(new THREE.BoxGeometry(.18,.22,.22),mM(0x222222,.4,.9));db.position.set(-tL/2-.4,.05,0);ota.add(db);
-    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,.22,24),mM(0x111111,.4,.85));ep.position.set(-tL/2-.4,.27,0);ota.add(ep);
-    var fk=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.06,24),mM(ac,.4,.85));fk.position.set(-tL/2-.16,-.18,0);fk.rotation.x=P;ota.add(fk);
-    var finder=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.5,16),mM(0x111111,.4,.9));finder.rotation.z=P;finder.position.set(0,tR+.12,0);ota.add(finder);
-    ota.position.set(0,1.55,0);ota.rotation.z=-.2;g.add(ota);g.position.y=-.1;return g;
+    var tubeDk=mM(0x0b0b0d,.55,.22);var orange=new THREE.MeshStandardMaterial({color:0xcc4200,roughness:.38,metalness:.18});var mntDk=mM(0x191a1f,.45,.78);var silver=mM(0xaaafb7,.22,.92);
+    /* Tripod — vector orientation, legs converge at y=0 */
+    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2;var fx=Math.cos(a)*1.42,fz=Math.sin(a)*1.42;var dv=new THREE.Vector3(fx,-2.55,fz);var lL=dv.length();dv.normalize();var leg=new THREE.Mesh(new THREE.BoxGeometry(.11,lL,.09),mntDk);leg.position.set(fx/2,-1.275,fz/2);leg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dv);g.add(leg);var foot=new THREE.Mesh(new THREE.CylinderGeometry(.09,.11,.09,10),mntDk);foot.position.set(fx,-2.55,fz);g.add(foot)}
+    var spr=new THREE.Mesh(new THREE.CylinderGeometry(.8,.8,.05,6),mntDk);spr.position.y=-1.45;g.add(spr);
+    /* CGX-L mount body: pier bottom at y=0 */
+    var mBase=new THREE.Mesh(new THREE.CylinderGeometry(.2,.26,.3,24),mntDk);mBase.position.y=.15;g.add(mBase);
+    var mBody=new THREE.Mesh(new THREE.BoxGeometry(.72,.5,.62),mntDk);mBody.position.y=.55;g.add(mBody);
+    /* RA axis — horizontal disc at y=.72 */
+    var ra=new THREE.Mesh(new THREE.CylinderGeometry(.3,.3,.14,40),mntDk);ra.rotation.z=P;ra.position.set(-.24,.72,0);g.add(ra);
+    /* DEC connection disc + vertical housing */
+    /* DEC: horizontal arm from mount body to vertical DEC housing */
+    var decArm=new THREE.Mesh(new THREE.BoxGeometry(.36,.24,.24),mntDk);decArm.position.set(.16,.72,0);g.add(decArm);
+    var decH=new THREE.Mesh(new THREE.CylinderGeometry(.26,.26,.72,28),mntDk);decH.position.set(.32,1.12,0);g.add(decH);
+    /* Counterweight shaft — VERTICAL, hangs down from RA left side */
+    var cwS=new THREE.Mesh(new THREE.CylinderGeometry(.032,.032,1.8,12),silver);cwS.position.set(-.34,.72-.9,0);g.add(cwS);
+    /* 2 counterweights stacked vertically on shaft */
+    var cw1=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,.34,32),mntDk);cw1.position.set(-.34,.72-1.42,0);g.add(cw1);
+    var cw1O=new THREE.Mesh(new THREE.CylinderGeometry(.282,.282,.06,32),orange);cw1O.position.set(-.34,.72-1.42,0);g.add(cw1O);
+    var cw2=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,.34,32),mntDk);cw2.position.set(-.34,.72-1.8,0);g.add(cw2);
+    var cw2O=new THREE.Mesh(new THREE.CylinderGeometry(.282,.282,.06,32),orange);cw2O.position.set(-.34,.72-1.8,0);g.add(cw2O);
+    /* OTA: large black short SCT tube */
+    var ota=new THREE.Group(),tL=1.52,tR=.54;
+    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,48),tubeDk);tube.rotation.z=P;ota.add(tube);
+    var oRing=new THREE.Mesh(new THREE.CylinderGeometry(tR+.004,tR+.004,.1,48),orange);oRing.rotation.z=P;oRing.position.x=tL/2-.32;ota.add(oRing);
+    var frontC=new THREE.Mesh(new THREE.CylinderGeometry(tR+.022,tR+.022,.1,48),mM(0x070709,.6,.2));frontC.rotation.z=P;frontC.position.x=tL/2+.05;ota.add(frontC);
+    var corr=new THREE.Mesh(new THREE.CylinderGeometry(tR-.012,tR-.012,.022,48),mG(0x445566));corr.rotation.z=P;corr.position.x=tL/2+.07;ota.add(corr);
+    var backC=new THREE.Mesh(new THREE.CylinderGeometry(tR+.022,tR+.022,.1,48),mM(0x070709,.6,.2));backC.rotation.z=P;backC.position.x=-tL/2-.05;ota.add(backC);
+    var vb=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,.22,20),mntDk);vb.rotation.z=P;vb.position.x=-tL/2-.18;ota.add(vb);
+    var diag=new THREE.Mesh(new THREE.BoxGeometry(.16,.22,.22),mntDk);diag.position.set(-tL/2-.22,.16,0);ota.add(diag);
+    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.065,.065,.28,16),mntDk);ep.position.set(-tL/2-.22,.38,0);ota.add(ep);
+    var fin=new THREE.Mesh(new THREE.CylinderGeometry(.042,.042,.48,12),mntDk);fin.rotation.z=P;fin.position.set(0,tR+.1,0);ota.add(fin);
+    ota.position.set(.32,1.48,0);ota.rotation.z=-.22;g.add(ota);g.position.y=-.1;return g;
   }
 
-  /* ══ MODELO 4: Dobsoniano (Zenith) ══ */
+  /* ══ MODELO 4: Omegon RC Truss (Zenith) ══ */
   function buildDobsonian(){
     var g=new THREE.Group(),P=Math.PI/2;
-    var tuC=0x0a0a0a,wC=0x6b4423,ac=0xc9a86a;
-    var gnd2=new THREE.Mesh(new THREE.CylinderGeometry(1.3,1.3,.1,8),mW(wC));gnd2.position.y=-2;g.add(gnd2);
-    var azB=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,.04,32),mPl(0x2a2a2a));azB.position.y=-1.93;g.add(azB);
-    var sGeo=new THREE.BoxGeometry(.06,1,1.5);
-    var left=new THREE.Mesh(sGeo,mW(wC));left.position.set(-.95,-1.4,0);g.add(left);
-    var right=new THREE.Mesh(sGeo,mW(wC));right.position.set(.95,-1.4,0);g.add(right);
-    var front=new THREE.Mesh(new THREE.BoxGeometry(2,.7,.06),mW(wC));front.position.set(0,-1.5,.75);g.add(front);
-    var back=new THREE.Mesh(new THREE.BoxGeometry(2,.7,.06),mW(wC));back.position.set(0,-1.5,-.75);g.add(back);
-    var rFloor=new THREE.Mesh(new THREE.BoxGeometry(1.9,.06,1.5),mW(0x4a2f17));rFloor.position.y=-1.85;g.add(rFloor);
-    [-1,1].forEach(function(s){var altB=new THREE.Mesh(new THREE.CylinderGeometry(.4,.4,.05,32),mPl(0x1a1a1a));altB.position.set(s*.92,-.95,0);altB.rotation.z=P;g.add(altB)});
-    var ota=new THREE.Group(),tL=3.6,tR=.62;
-    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,48),mP(tuC,.45));tube.rotation.z=P;ota.add(tube);
-    var ins=new THREE.Mesh(new THREE.CylinderGeometry(tR-.02,tR-.02,tL-.05,48,1,true),new THREE.MeshStandardMaterial({color:0x050505,roughness:.95,side:THREE.BackSide}));ins.rotation.z=P;ota.add(ins);
-    var sH=new THREE.Mesh(new THREE.CylinderGeometry(.13,.13,.1,16),mM(0x222222,.4,.9));sH.rotation.z=P/2;sH.position.x=tL/2-.35;ota.add(sH);
-    var sec=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,.02,24),new THREE.MeshStandardMaterial({color:0xdddddd,roughness:.05,metalness:1}));sec.rotation.z=P/2;sec.position.x=tL/2-.35;ota.add(sec);
-    for(var i=0;i<4;i++){var a=(i/4)*Math.PI*2;var vane=new THREE.Mesh(new THREE.BoxGeometry(.005,tR,.05),mM(0x888888,.3,.95));vane.position.set(tL/2-.35,Math.cos(a)*tR/2,Math.sin(a)*tR/2);vane.rotation.x=a;ota.add(vane)}
-    var bCap=new THREE.Mesh(new THREE.CylinderGeometry(tR+.04,tR+.04,.22,40),mM(0x161616,.5,.85));bCap.rotation.z=P;bCap.position.x=-tL/2-.05;ota.add(bCap);
-    [-1,1].forEach(function(s){var aR=new THREE.Mesh(new THREE.CylinderGeometry(.42,.42,.05,40),mW(0x3a2210));aR.position.set(0,0,s*(tR+.1));aR.rotation.x=P;ota.add(aR)});
-    for(var r=0;r<2;r++){var rd=new THREE.Mesh(new THREE.CylinderGeometry(tR+.001,tR+.001,.04,48),mP(ac,.3));rd.rotation.z=P;rd.position.x=-1.1+r*2.2;ota.add(rd)}
-    var fb=new THREE.Mesh(new THREE.BoxGeometry(.45,.45,.55),mM(0x2a2a2a,.4,.85));fb.position.set(tL/2-.7,tR+.22,0);ota.add(fb);
-    var dt=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,.45,24),mM(0xc0c0c0,.2,.95));dt.position.set(tL/2-.7,tR+.6,0);ota.add(dt);
-    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,.24,24),mM(0x111111,.4,.85));ep.position.set(tL/2-.7,tR+.94,0);ota.add(ep);
-    ota.position.set(0,-.4,0);ota.rotation.z=.7;g.add(ota);g.position.y=.1;return g;
+    var carbon=mM(0x0d0e10,.44,.22);var redNode=new THREE.MeshStandardMaterial({color:0xbb1010,roughness:.34,metalness:.28});var mirror=new THREE.MeshStandardMaterial({color:0x263240,roughness:.04,metalness:.97});var baseMat=mM(0x181820,.5,.4);
+    /* Rockerbox — walls go from base (y=-1.85) up to altitude bearing level (y=0) */
+    var azPlate=new THREE.Mesh(new THREE.CylinderGeometry(.65,.7,.14,8),baseMat);azPlate.position.y=-1.85;g.add(azPlate);
+    /* Walls at z=±.9 (same as trunnion ring z on OTA) */
+    var wGeo=new THREE.BoxGeometry(1.58,1.92,.09);
+    var wL=new THREE.Mesh(wGeo,baseMat);wL.position.set(0,-.97,.9);g.add(wL);
+    var wR=new THREE.Mesh(wGeo,baseMat);wR.position.set(0,-.97,-.9);g.add(wR);
+    var wGeo2=new THREE.BoxGeometry(.09,1.92,1.8);
+    var wFr=new THREE.Mesh(wGeo2,baseMat);wFr.position.set(.75,-.97,0);g.add(wFr);
+    var wBk=new THREE.Mesh(wGeo2,baseMat);wBk.position.set(-.75,-.97,0);g.add(wBk);
+    /* Altitude bearing discs at y=0, z=±.9 (match trunnion rings) */
+    [.9,-.9].forEach(function(z){var ab=new THREE.Mesh(new THREE.CylinderGeometry(.52,.52,.07,32),baseMat);ab.rotation.x=P;ab.position.set(0,0,z);g.add(ab)});
+    /* OTA — pivot at y=0, trunnion rings at z=±.9 */
+    var ota=new THREE.Group(),bR=.8,tR2=.48,h=2.8,N=8;
+    /* Trunnion rings on OTA at y=0, z=±.9 */
+    [.9,-.9].forEach(function(z){var tr=new THREE.Mesh(new THREE.CylinderGeometry(.52,.52,.06,32),carbon);tr.rotation.x=P;tr.position.set(0,0,z);ota.add(tr)});
+    /* Bottom ring (primary cell) at y=-h/2 */
+    var bRing=new THREE.Mesh(new THREE.TorusGeometry(bR,.07,8,N),carbon);bRing.rotation.x=P;bRing.position.y=-h/2;ota.add(bRing);
+    for(var f=0;f<N;f++){var fa=(f/N)*Math.PI*2+(Math.PI/N);var fp=new THREE.Mesh(new THREE.BoxGeometry(.07,.2,.62),carbon);fp.position.set(Math.cos(fa)*bR,-h/2,Math.sin(fa)*bR);fp.rotation.y=-fa;ota.add(fp)}
+    var prim=new THREE.Mesh(new THREE.CylinderGeometry(bR-.06,bR-.06,.05,N),mirror);prim.position.y=-h/2;ota.add(prim);
+    /* Top ring at y=h/2 */
+    var tRingM=new THREE.Mesh(new THREE.TorusGeometry(tR2,.055,8,N),carbon);tRingM.rotation.x=P;tRingM.position.y=h/2;ota.add(tRingM);
+    for(var tf=0;tf<N;tf++){var tfa=(tf/N)*Math.PI*2+(Math.PI/N);var tp=new THREE.Mesh(new THREE.BoxGeometry(.055,.16,.46),carbon);tp.position.set(Math.cos(tfa)*tR2,h/2,Math.sin(tfa)*tR2);tp.rotation.y=-tfa;ota.add(tp)}
+    /* 8 truss poles: bottom ring → top ring, midpoint at y=0 */
+    for(var t=0;t<N;t++){var ta=(t/N)*Math.PI*2+(Math.PI/N);var bx=Math.cos(ta)*bR,bz=Math.sin(ta)*bR,tx=Math.cos(ta)*tR2,tz=Math.sin(ta)*tR2;var pVec=new THREE.Vector3(tx-bx,h,tz-bz);var pLen=pVec.length();var pole=new THREE.Mesh(new THREE.CylinderGeometry(.019,.019,pLen,8),carbon);pole.position.set((bx+tx)/2,0,(bz+tz)/2);pole.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),pVec.normalize());ota.add(pole);var bn=new THREE.Mesh(new THREE.SphereGeometry(.058,12,8),redNode);bn.position.set(bx,-h/2,bz);ota.add(bn);var tn=new THREE.Mesh(new THREE.SphereGeometry(.044,12,8),redNode);tn.position.set(tx,h/2,tz);ota.add(tn)}
+    /* Spider vanes + secondary */
+    for(var v=0;v<4;v++){var va=(v/4)*Math.PI*2;var vane=new THREE.Mesh(new THREE.BoxGeometry(.006,tR2,.01),carbon);vane.position.set(Math.cos(va)*tR2/2,h/2,Math.sin(va)*tR2/2);vane.rotation.y=-va;ota.add(vane)}
+    var sec=new THREE.Mesh(new THREE.CylinderGeometry(.14,.14,.03,24),mirror);sec.position.y=h/2;ota.add(sec);
+    var secH=new THREE.Mesh(new THREE.CylinderGeometry(.068,.068,.12,16),carbon);secH.position.y=h/2+.01;ota.add(secH);
+    var fBox=new THREE.Mesh(new THREE.BoxGeometry(.22,.17,.18),baseMat);fBox.position.set(tR2+.13,h/2-.4,0);ota.add(fBox);
+    var fTube=new THREE.Mesh(new THREE.CylinderGeometry(.058,.058,.28,12),baseMat);fTube.rotation.z=P;fTube.position.set(tR2+.29,h/2-.4,0);ota.add(fTube);
+    /* OTA pivot at y=0 matches altitude bearings — no offset needed */
+    g.add(ota);g.position.y=.05;return g;
   }
 
-  /* ══ MODELO 5: Maksutov (Stellar) ══ */
+  /* ══ MODELO 5: Unistellar eVscope 2 (Stellar) ══ */
   function buildMaksutov(){
     var g=new THREE.Group(),P=Math.PI/2;
-    var bC=0x1a4d3a,ac=0xd4af37,dk=0x111111;
-    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2+.2;var leg=new THREE.Mesh(new THREE.CylinderGeometry(.05,.035,2.6,16),mM(0xc0c0c0,.25,.95));leg.position.set(Math.cos(a)*.7,-1,Math.sin(a)*.7);leg.rotation.z=-Math.cos(a)*.28;leg.rotation.x=Math.sin(a)*.28;g.add(leg);var foot=new THREE.Mesh(new THREE.CylinderGeometry(.07,.09,.08,16),mPl(0x111111));foot.position.set(Math.cos(a)*1.15,-2.05,Math.sin(a)*1.15);g.add(foot)}
-    var sp=new THREE.Mesh(new THREE.CylinderGeometry(.16,.18,.18,24),mM(0x222222,.4,.9));sp.position.y=.25;g.add(sp);
-    var azB=new THREE.Mesh(new THREE.CylinderGeometry(.22,.25,.22,32),mP(bC,.4));azB.position.y=.46;g.add(azB);
-    var azR=new THREE.Mesh(new THREE.TorusGeometry(.23,.014,8,32),mM(ac,.3,.9));azR.position.y=.55;azR.rotation.x=P;g.add(azR);
-    var aL=new THREE.Mesh(new THREE.BoxGeometry(.16,1,.16),mP(bC,.4));aL.position.set(0,1.05,-.08);g.add(aL);
-    var aU=new THREE.Mesh(new THREE.BoxGeometry(.26,.18,.16),mP(bC,.4));aU.position.set(.05,1.65,-.08);g.add(aU);
-    var altK=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.08,24),mM(ac,.3,.9));altK.position.set(.2,1.55,0);altK.rotation.x=P;g.add(altK);
-    var azK=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.06,24),mM(ac,.3,.9));azK.position.set(0,.5,.32);azK.rotation.x=P;g.add(azK);
-    var ota=new THREE.Group(),tL=.9,tR=.26;
-    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR,tR,tL,40),mP(bC,.35));tube.rotation.z=P;ota.add(tube);
-    var men=new THREE.Mesh(new THREE.CylinderGeometry(tR+.02,tR+.02,.1,40),mM(dk,.4,.9));men.rotation.z=P;men.position.x=tL/2+.05;ota.add(men);
-    var cGl=new THREE.Mesh(new THREE.CylinderGeometry(tR-.01,tR-.01,.02,40),mG(0x88aacc));cGl.rotation.z=P;cGl.position.x=tL/2+.05;ota.add(cGl);
-    var secS=new THREE.Mesh(new THREE.CylinderGeometry(.1,.1,.025,24),mM(0x222222,.3,.95));secS.rotation.z=P;secS.position.x=tL/2+.06;ota.add(secS);
-    var bPl=new THREE.Mesh(new THREE.CylinderGeometry(tR+.02,tR+.02,.1,40),mM(dk,.4,.9));bPl.rotation.z=P;bPl.position.x=-tL/2-.05;ota.add(bPl);
-    var vB=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.16,24),mM(dk,.4,.9));vB.rotation.z=P;vB.position.x=-tL/2-.18;ota.add(vB);
-    var db=new THREE.Mesh(new THREE.BoxGeometry(.16,.18,.18),mM(0x222222,.4,.9));db.position.set(-tL/2-.32,.08,0);ota.add(db);
-    var ep=new THREE.Mesh(new THREE.CylinderGeometry(.08,.08,.2,24),mM(dk,.4,.85));ep.position.set(-tL/2-.32,.28,0);ota.add(ep);
-    var aRing=new THREE.Mesh(new THREE.CylinderGeometry(tR+.001,tR+.001,.04,40),mP(ac,.3));aRing.rotation.z=P;aRing.position.x=tL/2-.1;ota.add(aRing);
-    ota.position.set(0,1.58,0);ota.rotation.z=-.15;g.add(ota);g.position.y=-.05;return g;
+    var silver=new THREE.MeshStandardMaterial({color:0xb0b4ba,roughness:.22,metalness:.84});var blackM=mM(0x101012,.5,.3);var darkM=mM(0x20212a,.44,.58);var carbon=mM(0x18191d,.35,.52);
+    /* Thin 3-leg carbon tripod — vector orientation, legs converge at y=0 */
+    for(var i=0;i<3;i++){var a=(i/3)*Math.PI*2+Math.PI/6;var fx=Math.cos(a)*.78,fz=Math.sin(a)*.78;var dv=new THREE.Vector3(fx,-2.25,fz);var lL=dv.length();dv.normalize();var leg=new THREE.Mesh(new THREE.CylinderGeometry(.022,.026,lL,8),carbon);leg.position.set(fx/2,-1.125,fz/2);leg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dv);g.add(leg);var foot=new THREE.Mesh(new THREE.SphereGeometry(.03,8,6),blackM);foot.position.set(fx,-2.25,fz);g.add(foot)}
+    /* Center collar: y=0 (tripod top) → y=.5 (base bottom), height=.5 */
+    var col=new THREE.Mesh(new THREE.CylinderGeometry(.04,.05,.5,16),darkM);col.position.y=.25;g.add(col);
+    /* Smart alt-az base — sits on top of collar (y=.5) */
+    var azBase=new THREE.Mesh(new THREE.CylinderGeometry(.3,.32,.25,32),blackM);azBase.position.y=.625;g.add(azBase);
+    /* Electronics housing: bottom at y=.75 */
+    var elecH=new THREE.Mesh(new THREE.BoxGeometry(.48,.34,.38),blackM);elecH.position.y=.92;g.add(elecH);
+    /* Top cap of electronics: bottom at y=1.09 */
+    var elecTop=new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,.1,32),blackM);elecTop.position.y=1.14;g.add(elecTop);
+    /* Single arm: bottom connects at y=1.19, height=.72 → center y=1.55 */
+    var arm=new THREE.Mesh(new THREE.BoxGeometry(.1,.72,.1),blackM);arm.position.set(.24,1.55,0);g.add(arm);
+    /* Bracket at top of arm: y=1.55+.36=1.91 */
+    var bracket=new THREE.Mesh(new THREE.BoxGeometry(.1,.1,.28),darkM);bracket.position.set(.24,1.94,0);g.add(bracket);
+    /* OTA: silver compact cylinder */
+    var ota=new THREE.Group(),tL=1.12,tR2=.18;
+    var tube=new THREE.Mesh(new THREE.CylinderGeometry(tR2,tR2,tL,36),silver);tube.rotation.z=P;ota.add(tube);
+    var fRing=new THREE.Mesh(new THREE.CylinderGeometry(tR2+.018,tR2+.018,.072,36),blackM);fRing.rotation.z=P;fRing.position.x=tL/2+.036;ota.add(fRing);
+    var lens=new THREE.Mesh(new THREE.CylinderGeometry(tR2-.004,tR2-.004,.018,36),mG(0x223366));lens.rotation.z=P;lens.position.x=tL/2+.05;ota.add(lens);
+    var elBody=new THREE.Mesh(new THREE.BoxGeometry(tL*.55,.3,.26),blackM);elBody.position.set(0,-tR2-.1,0);ota.add(elBody);
+    var aRing=new THREE.Mesh(new THREE.CylinderGeometry(tR2+.002,tR2+.002,.036,36),darkM);aRing.rotation.z=P;aRing.position.x=.06;ota.add(aRing);
+    var brand=new THREE.Mesh(new THREE.BoxGeometry(.52,.02,.19),darkM);brand.position.set(0,tR2+.005,0);ota.add(brand);
+    ota.position.set(.24,1.94,0);ota.rotation.z=-.48;g.add(ota);g.position.y=-.85;return g;
   }
 
   function init(){
-    createScene('canvas-cosmos', buildRefractor,  6,   3.5, 8);
+    createScene('canvas-cosmos', buildRefractor,  6,   2.8, 9);
     createScene('canvas-nova',   buildNewtonian,  6,   3.5, 8);
-    createScene('canvas-apex',   buildSCT,        5,   2.8, 7);
-    createScene('canvas-zenith', buildDobsonian,  7,   3.5, 9);
-    createScene('canvas-stellar',buildMaksutov,   4.5, 2.5, 6.5);
+    createScene('canvas-apex',   buildSCT,        5,   2.4, 7);
+    createScene('canvas-zenith', buildDobsonian,  6,   1.8,10);
+    createScene('canvas-stellar',buildMaksutov,   4,   1.5, 6);
   }
 
   if(document.readyState==='complete') init();
@@ -828,7 +870,7 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
 .cm-backdrop.is-open{opacity:1;visibility:visible}
 .cm-box{position:relative;background:linear-gradient(145deg,#0d0d1a,#111128);border:1px solid rgba(0,212,255,.15);border-radius:16px;padding:48px 44px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;transform:translateY(24px) scale(.97);transition:transform .35s cubic-bezier(.22,1,.36,1)}
 .cm-backdrop.is-open .cm-box{transform:translateY(0) scale(1)}
-.cm-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#f8fafc;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.cm-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#f8fafc;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
 .cm-close:hover{background:rgba(0,212,255,.15);border-color:rgba(0,212,255,.4)}
 .cm-eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;color:var(--cyan,#00d4ff);margin-bottom:12px;text-transform:uppercase}
 .cm-title{font-size:clamp(26px,4vw,34px);font-weight:700;line-height:1.15;margin-bottom:12px}
@@ -840,10 +882,10 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
 .cm-input::placeholder{color:rgba(248,250,252,.3)}
 .cm-input:focus{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.04)}
 .cm-input.is-error{border-color:rgba(239,68,68,.6)}
-.cm-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(248,250,252,0.4)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:pointer}
+.cm-select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(248,250,252,0.4)' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;cursor:none}
 .cm-select option{background:#111128;color:#f8fafc}
 .cm-textarea{resize:vertical;min-height:110px}
-.cm-submit{margin-top:4px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 28px;background:var(--cyan,#00d4ff);color:#03030a;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:8px;cursor:pointer;transition:opacity .2s,transform .15s}
+.cm-submit{margin-top:4px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 28px;background:var(--cyan,#00d4ff);color:#03030a;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:8px;cursor:none;transition:opacity .2s,transform .15s}
 .cm-submit:hover{opacity:.88;transform:translateY(-1px)}
 .cm-submit:active{transform:translateY(0)}
 .cm-success{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;padding:20px 0}
@@ -938,5 +980,363 @@ var sa=0;(function aS(){sa+=.2;document.querySelectorAll('.specs-circle').forEac
   });
 })();
 </script>
+<!-- ── PRODUCT MODAL ── -->
+<div id="pm-backdrop" class="pm-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="pm-img-name">
+  <div class="pm-box">
+    <button class="pm-close" id="pm-close" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="pm-img-col">
+      <div class="pm-canvas-host" id="pm-canvas-host"></div>
+      <div class="pm-img-overlay">
+        <p class="pm-img-cat" id="pm-img-cat"></p>
+        <h2 class="pm-img-name" id="pm-img-name"></h2>
+      </div>
+    </div>
+    <div class="pm-detail-col">
+      <div class="pm-detail-inner">
+        <div class="pm-top">
+          <div class="pm-badge-wrap" id="pm-badge-wrap"></div>
+          <div class="pm-price-wrap">
+            <span class="pm-price-old" id="pm-price-old" hidden></span>
+            <span class="pm-price" id="pm-price"></span>
+          </div>
+        </div>
+        <div class="pm-chips" id="pm-chips"></div>
+        <p class="pm-desc" id="pm-desc"></p>
+        <table class="pm-specs-table" id="pm-specs-table"></table>
+        <ul class="pm-features" id="pm-features"></ul>
+        <div class="pm-actions">
+          <div class="pm-qty-wrap">
+            <button class="pm-qty-btn" id="pm-qty-minus" aria-label="Reducir cantidad">−</button>
+            <span class="pm-qty-val" id="pm-qty-val">1</span>
+            <button class="pm-qty-btn" id="pm-qty-plus" aria-label="Aumentar cantidad">+</button>
+          </div>
+          <button class="pm-add-btn" id="pm-add-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Añadir al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CART DRAWER ── -->
+<div id="cart-backdrop" class="cart-backdrop" aria-hidden="true">
+  <div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Tu carrito">
+    <div class="cart-header">
+      <h2 class="cart-title">Tu carrito</h2>
+      <button class="cart-close" id="cart-close" aria-label="Cerrar carrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-empty" id="cart-empty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <p>Tu carrito está vacío</p>
+      <button class="cart-keep-btn" id="cart-empty-shop">Ver telescopios</button>
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <div class="cart-subtotal">
+        <span>Subtotal</span>
+        <span class="cart-total-val" id="cart-total-val">0 €</span>
+      </div>
+      <p class="cart-shipping">Envío gratuito en pedidos superiores a 500 €</p>
+      <button class="cart-checkout-btn">
+        Proceder al pago
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <button class="cart-keep-btn" id="cart-keep-btn">Seguir comprando</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<style>
+/* NAV CART */
+.nav-cart{position:relative;background:none;border:1px solid rgba(0,212,255,.25);border-radius:8px;padding:8px 10px;color:var(--cyan,#00d4ff);cursor:none;display:flex;align-items:center;transition:background .2s,border-color .2s;flex-shrink:0}
+.nav-cart:hover{background:rgba(0,212,255,.1);border-color:rgba(0,212,255,.5)}
+.cart-badge{position:absolute;top:-7px;right:-7px;background:var(--cyan,#00d4ff);color:#03030a;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:none;align-items:center;justify-content:center;padding:0 4px;line-height:1}
+
+/* PRODUCT MODAL */
+.pm-backdrop{position:fixed;inset:0;background:rgba(3,3,10,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:11000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.pm-backdrop.is-open{opacity:1;visibility:visible}
+.pm-box{position:relative;display:grid;grid-template-columns:40% 60%;grid-template-rows:1fr;width:100%;max-width:960px;height:min(90vh,700px);background:#0b0c1c;border:1px solid rgba(0,212,255,.12);border-radius:16px;overflow:hidden;transform:translateY(22px) scale(.97);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.pm-backdrop.is-open .pm-box{transform:none}
+.pm-close{position:absolute;top:16px;right:16px;z-index:10;width:34px;height:34px;border-radius:50%;background:rgba(3,3,10,.6);border:1px solid rgba(255,255,255,.15);color:#fff;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.pm-close:hover{background:rgba(0,212,255,.25)}
+.pm-img-col{position:relative;overflow:hidden;background:linear-gradient(145deg,#07101e,#0d1628,#08101c)}
+#scope-store{position:fixed;left:-9999px;top:0;width:640px;height:480px;overflow:hidden;pointer-events:none;opacity:0}
+#scope-store .scope-canvas-wrap{position:absolute;inset:0;width:640px;height:480px}
+.pm-canvas-host{position:absolute;inset:0;width:100%;height:100%;background:#0b0d18;overflow:hidden}
+.pm-canvas-host img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center}
+.pm-canvas-host .scope-canvas-wrap{position:absolute!important;inset:0!important;width:100%!important;height:100%!important}
+.pm-canvas-host .scope-canvas-wrap canvas{display:block;width:100%!important;height:100%!important}
+.pm-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(3,3,10,.95) 0%,rgba(3,3,10,.3) 55%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px}
+.pm-img-cat{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--cyan,#00d4ff);text-transform:uppercase;margin-bottom:8px}
+.pm-img-name{font-size:22px;font-weight:700;line-height:1.2;color:#fff}
+.pm-detail-col{overflow-y:auto;min-height:0;border-left:1px solid rgba(255,255,255,.06)}
+.pm-detail-inner{padding:36px 32px;display:flex;flex-direction:column;gap:20px}
+.pm-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.pm-badge-wrap{display:flex;gap:8px;flex-wrap:wrap;padding-top:4px}
+.pm-badge{padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:4px;display:inline-block}
+.pm-badge.b-default{background:var(--cyan,#00d4ff);color:#03030a}
+.pm-badge.b-new{background:#c9a86a;color:#03030a}
+.pm-badge.b-sale{background:transparent;border:1px solid var(--cyan,#00d4ff);color:var(--cyan,#00d4ff)}
+.pm-badge.b-init{background:#7c3aed;color:#fff}
+.pm-price-wrap{text-align:right;flex-shrink:0}
+.pm-price-old{font-family:'JetBrains Mono',monospace;font-size:14px;color:rgba(248,250,252,.35);text-decoration:line-through;display:block;margin-bottom:2px}
+.pm-price{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:700;color:#fff;display:block}
+.pm-chips{display:flex;flex-wrap:wrap;gap:8px}
+.pm-chip{padding:5px 12px;background:rgba(0,212,255,.07);border:1px solid rgba(0,212,255,.2);border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan,#00d4ff)}
+.pm-desc{font-size:14px;color:rgba(248,250,252,.65);line-height:1.75;margin:0}
+.pm-specs-table{width:100%;border-collapse:collapse;font-size:13px}
+.pm-specs-table tr{border-bottom:1px solid rgba(255,255,255,.05)}
+.pm-specs-table td:first-child{color:rgba(248,250,252,.4);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:9px 0;width:44%}
+.pm-specs-table td:last-child{color:#f8fafc;padding:9px 0;font-weight:500}
+.pm-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin:0;padding:0}
+.pm-features li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(248,250,252,.7);line-height:1.5}
+.pm-features li::before{content:'';flex-shrink:0;width:5px;height:5px;border-radius:50%;background:var(--cyan,#00d4ff);margin-top:6px}
+.pm-actions{display:flex;align-items:center;gap:12px;margin-top:4px;flex-wrap:wrap;padding-bottom:8px}
+.pm-qty-wrap{display:flex;align-items:center;border:1px solid rgba(255,255,255,.12);border-radius:8px;overflow:hidden;flex-shrink:0}
+.pm-qty-btn{width:38px;height:44px;background:rgba(255,255,255,.04);border:none;color:#f8fafc;font-size:20px;cursor:none;transition:background .15s;display:flex;align-items:center;justify-content:center;line-height:1}
+.pm-qty-btn:hover{background:rgba(0,212,255,.15)}
+.pm-qty-val{width:42px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;background:rgba(255,255,255,.03);height:44px;display:flex;align-items:center;justify-content:center}
+.pm-add-btn{flex:1;min-width:180px;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 20px;background:var(--cyan,#00d4ff);color:#03030a;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:8px;cursor:none;transition:opacity .2s,transform .15s}
+.pm-add-btn:hover{opacity:.88;transform:translateY(-1px)}
+.pm-add-btn:active{transform:none}
+
+/* CART DRAWER */
+.cart-backdrop{position:fixed;inset:0;background:rgba(3,3,10,.55);z-index:11000;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.cart-backdrop.is-open{opacity:1;visibility:visible}
+.cart-drawer{position:absolute;top:0;right:0;bottom:0;width:420px;max-width:100vw;background:#0b0c1c;border-left:1px solid rgba(0,212,255,.1);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.cart-backdrop.is-open .cart-drawer{transform:none}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.cart-title{font-size:20px;font-weight:700}
+.cart-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.06);border:none;color:#f8fafc;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cart-close:hover{background:rgba(0,212,255,.15)}
+.cart-items{flex:1;overflow-y:auto;padding:8px 16px}
+.cart-item{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.cart-item-img{width:66px;height:66px;border-radius:8px;object-fit:cover;flex-shrink:0;background:rgba(255,255,255,.04)}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:14px;font-weight:600;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-unit{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(248,250,252,.45);margin-bottom:8px}
+.cart-item-row{display:flex;align-items:center;gap:8px}
+.cart-item-subtotal{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--cyan,#00d4ff);flex:1}
+.cart-item-qty{display:flex;align-items:center;border:1px solid rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+.cart-item-qty button{width:28px;height:28px;background:rgba(255,255,255,.04);border:none;color:#f8fafc;font-size:15px;cursor:none;transition:background .15s;display:flex;align-items:center;justify-content:center}
+.cart-item-qty button:hover{background:rgba(0,212,255,.12)}
+.cart-item-qty span{width:30px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700}
+.cart-item-remove{background:none;border:none;color:rgba(248,250,252,.25);cursor:none;padding:4px;transition:color .2s;display:flex;align-items:center;flex-shrink:0}
+.cart-item-remove:hover{color:rgba(239,68,68,.8)}
+.cart-empty{display:none;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:16px;text-align:center;color:rgba(248,250,252,.3);padding:48px 24px}
+.cart-empty svg{opacity:.25}
+.cart-empty p{font-size:16px;color:rgba(248,250,252,.45)}
+.cart-footer{padding:20px 24px;border-top:1px solid rgba(255,255,255,.06);flex-shrink:0}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;font-size:15px;color:rgba(248,250,252,.7)}
+.cart-total-val{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:700;color:#fff}
+.cart-shipping{font-size:12px;color:rgba(248,250,252,.35);margin-bottom:18px}
+.cart-checkout-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:15px;background:var(--cyan,#00d4ff);color:#03030a;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;border-radius:8px;cursor:none;margin-bottom:10px;transition:opacity .2s,transform .15s}
+.cart-checkout-btn:hover{opacity:.88;transform:translateY(-1px)}
+.cart-keep-btn{width:100%;padding:10px;background:none;border:none;color:rgba(248,250,252,.45);font-size:13px;cursor:none;transition:color .2s}
+.cart-keep-btn:hover{color:rgba(248,250,252,.8)}
+
+/* TOAST */
+.toast{position:fixed;top:88px;left:50%;transform:translateX(-50%) translateY(-16px);background:rgba(11,12,28,.95);border:1px solid rgba(0,212,255,.35);backdrop-filter:blur(12px);color:#f8fafc;padding:12px 24px;border-radius:8px;font-size:14px;font-weight:500;z-index:12000;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+
+<script>
+(function(){
+  var PRODUCTS={
+    cosmos:{id:'cosmos',name:'E-EYE Cosmos Pro 120',cat:'Refractor APO — Serie Cosmos',price:2890,badge:'Más vendido',badgeClass:'b-default',img:'assets/cosmos-refractor.png',chips:['120mm APO','F/7.5','GoTo','USB-C'],shortDesc:'El telescopio refractor apocromático más vendido. Con 120 mm y óptica ED de triple elemento, ofrece imágenes de claridad sin igual tanto en observación planetaria como en astrofotografía.',specs:[{k:'Apertura',v:'120 mm'},{k:'Distancia focal',v:'900 mm (F/7.5)'},{k:'Óptica',v:'ED Triple elemento APO'},{k:'Montura',v:'GoTo EQ motorizada'},{k:'Conectividad',v:'USB-C + WiFi'},{k:'Peso tubo',v:'4.2 kg'},{k:'Longitud',v:'82 cm'},{k:'Oculares',v:'10 mm y 25 mm E-EYE'}],features:['Cero aberración cromática con óptica ED triple elemento','GoTo con base de datos de 42.000 objetos celestes','Puerto USB-C para astroCámara y refrigeración','App E-EYE compatible con iOS y Android','Garantía de por vida en óptica y estructura']},
+    nova:{id:'nova',name:'E-EYE Nova 8"',cat:'Reflector Newtoniano',price:1490,badge:'Nuevo',badgeClass:'b-new',img:'assets/nova-newton.png',chips:['200mm','F/5','EQ6'],shortDesc:'Reflector newtoniano de 200 mm para observación visual y fotografía de campo profundo. Montura ecuatorial motorizada con seguimiento de precisión.',specs:[{k:'Apertura',v:'200 mm (8")'},{k:'Distancia focal',v:'1.000 mm (F/5)'},{k:'Óptica',v:'Newtoniano parabolóico'},{k:'Montura',v:'EQ6 motorizada GoTo'},{k:'Colimación',v:'3 tornillos de ajuste'},{k:'Peso tubo',v:'6.8 kg'},{k:'Longitud',v:'95 cm'},{k:'Oculares',v:'10 mm y 25 mm E-EYE'}],features:['Espejo primario parabolóico aluminizado al 96 %','Montura EQ6 con 2 motores paso a paso','GoTo con base de datos de 42.000 objetos','Óptimo para astrofotografía de campo profundo','Garantía de por vida en óptica y estructura']},
+    apex:{id:'apex',name:'E-EYE Apex SC 11"',cat:'Schmidt-Cassegrain',price:3250,badge:null,badgeClass:'',img:'assets/apex-sct.png',chips:['280mm','F/10','WiFi'],shortDesc:'280 mm de apertura en un tubo compacto. Rendimiento de observatorio, portabilidad de mochila. GoTo WiFi integrado para control desde smartphone.',specs:[{k:'Apertura',v:'280 mm (11")'},{k:'Distancia focal',v:'2.800 mm (F/10)'},{k:'Óptica',v:'Schmidt-Cassegrain'},{k:'Montura',v:'AltAz GoTo motorizada'},{k:'Conectividad',v:'WiFi + USB-C'},{k:'Peso tubo',v:'6.1 kg'},{k:'Longitud',v:'58 cm'},{k:'Oculares',v:'10 mm y 25 mm E-EYE'}],features:['Diseño plegado Schmidt-Cassegrain ultra-compacto','GoTo WiFi con control desde smartphone','Foco trasero con corrector de campo incluido','Reducible a F/6.3 con reductor opcional','Garantía de por vida en óptica y estructura']},
+    zenith:{id:'zenith',name:'E-EYE Zenith 12"',cat:'Dobsoniano Go-To',price:1592,priceOld:1990,badge:'−20 %',badgeClass:'b-sale',img:'assets/zenith-rc.png',chips:['300mm','F/4.9','App'],shortDesc:'La mayor apertura de nuestra gama. 300 mm de luz capturada, montura Dobson GoTo con app integrada para localizar cualquier objeto en segundos.',specs:[{k:'Apertura',v:'300 mm (12")'},{k:'Distancia focal',v:'1.500 mm (F/4.9)'},{k:'Óptica',v:'Newtoniano Dobsoniano'},{k:'Montura',v:'Dobson GoTo con encoders'},{k:'Conectividad',v:'Bluetooth + App'},{k:'Peso total',v:'23 kg'},{k:'Diámetro base',v:'65 cm'},{k:'Oculares',v:'10 mm y 25 mm E-EYE'}],features:['Mayor apertura de la gama E-EYE','Encoders absolutos para apuntado de precisión','App E-EYE con mapas estelares en tiempo real','Estructura Dobson colapsable para transporte','Garantía de por vida en óptica y estructura']},
+    stellar:{id:'stellar',name:'E-EYE Stellar 70',cat:'Refractor — Serie Stellar',price:490,badge:'Iniciación',badgeClass:'b-init',img:'assets/stellar-evscope.png',chips:['70mm','F/6','AZ'],shortDesc:'El punto de partida perfecto. 70 mm APO en montura AZ manual. Compacto, portátil y con la misma calidad óptica que el resto de la gama E-EYE.',specs:[{k:'Apertura',v:'70 mm'},{k:'Distancia focal',v:'420 mm (F/6)'},{k:'Óptica',v:'Refractor APO acromático'},{k:'Montura',v:'AltAzimutal manual'},{k:'Trípode',v:'Aluminio ajustable'},{k:'Peso total',v:'2.8 kg'},{k:'Longitud',v:'44 cm'},{k:'Oculares',v:'6 mm y 20 mm E-EYE'}],features:['Compacto y portátil — cabe en una mochila','La misma óptica APO E-EYE a precio de inicio','Trípode de aluminio con rótula altazimutal','Incluye buscador red-dot y dos oculares','Garantía de por vida en óptica y estructura']}
+  };
+
+  var cart=JSON.parse(localStorage.getItem('eeye-cart')||'[]');
+
+  function saveCart(){localStorage.setItem('eeye-cart',JSON.stringify(cart))}
+  function fmt(p){return p.toLocaleString('es-ES')+' €'}
+  function getItem(id){return cart.find(function(i){return i.id===id})}
+
+  function updateBadge(){
+    var n=cart.reduce(function(s,i){return s+i.qty},0);
+    var b=document.getElementById('cart-badge');
+    b.textContent=n;b.style.display=n>0?'flex':'none';
+  }
+
+  function showToast(msg){
+    var t=document.getElementById('toast');
+    t.textContent=msg;t.classList.add('show');
+    clearTimeout(t._tid);t._tid=setTimeout(function(){t.classList.remove('show')},2600);
+  }
+
+  function addToCart(id,qty){
+    var p=PRODUCTS[id];if(!p)return;
+    var it=getItem(id);
+    if(it){it.qty+=qty}else{cart.push({id:id,name:p.name,price:p.price,img:p.img,qty:qty})}
+    saveCart();updateBadge();renderCart();
+    showToast('✓ '+p.name+' añadido al carrito');
+  }
+
+  function removeFromCart(id){
+    cart=cart.filter(function(i){return i.id!==id});
+    saveCart();updateBadge();renderCart();
+  }
+
+  function changeQty(id,delta){
+    var it=getItem(id);if(!it)return;
+    it.qty=Math.max(1,it.qty+delta);
+    saveCart();updateBadge();renderCart();
+  }
+
+  function renderCart(){
+    var cItems=document.getElementById('cart-items');
+    var cFooter=document.getElementById('cart-footer');
+    var cEmpty=document.getElementById('cart-empty');
+    var cTotal=document.getElementById('cart-total-val');
+    if(cart.length===0){
+      cItems.innerHTML='';
+      cFooter.style.display='none';
+      cEmpty.style.display='flex';
+      return;
+    }
+    cFooter.style.display='block';
+    cEmpty.style.display='none';
+    cItems.innerHTML=cart.map(function(it){
+      return '<div class="cart-item">'
+        +'<img class="cart-item-img" src="'+it.img+'" alt="'+it.name+'" loading="lazy">'
+        +'<div class="cart-item-info">'
+        +'<div class="cart-item-name">'+it.name+'</div>'
+        +'<div class="cart-item-unit">'+fmt(it.price)+' / ud.</div>'
+        +'<div class="cart-item-row">'
+        +'<span class="cart-item-subtotal">'+fmt(it.price*it.qty)+'</span>'
+        +'<div class="cart-item-qty">'
+        +'<button onclick="window.__ee.chg(\''+it.id+'\',-1)">&#8722;</button>'
+        +'<span>'+it.qty+'</span>'
+        +'<button onclick="window.__ee.chg(\''+it.id+'\',1)">+</button>'
+        +'</div>'
+        +'<button class="cart-item-remove" onclick="window.__ee.rm(\''+it.id+'\')" aria-label="Eliminar">'
+        +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>'
+        +'</button>'
+        +'</div>'
+        +'</div>'
+        +'</div>';
+    }).join('');
+    cTotal.textContent=fmt(cart.reduce(function(s,i){return s+i.price*i.qty},0));
+  }
+
+  /* PRODUCT MODAL */
+  var pmId=null,pmQty=1,pmCanvasRef=null;
+
+  function openPM(id){
+    var p=PRODUCTS[id];if(!p)return;
+    pmId=id;pmQty=1;
+    document.getElementById('pm-img-cat').textContent=p.cat;
+    document.getElementById('pm-img-name').textContent=p.name;
+    var bw=document.getElementById('pm-badge-wrap');
+    bw.innerHTML=p.badge?'<span class="pm-badge '+p.badgeClass+'">'+p.badge+'</span>':'';
+    var oldEl=document.getElementById('pm-price-old');
+    if(p.priceOld){oldEl.textContent=fmt(p.priceOld);oldEl.hidden=false}else{oldEl.hidden=true}
+    document.getElementById('pm-price').textContent=fmt(p.price);
+    document.getElementById('pm-chips').innerHTML=p.chips.map(function(c){return'<span class="pm-chip">'+c+'</span>'}).join('');
+    document.getElementById('pm-desc').textContent=p.shortDesc;
+    document.getElementById('pm-specs-table').innerHTML=p.specs.map(function(s){return'<tr><td>'+s.k+'</td><td>'+s.v+'</td></tr>'}).join('');
+    document.getElementById('pm-features').innerHTML=p.features.map(function(f){return'<li>'+f+'</li>'}).join('');
+    document.getElementById('pm-qty-val').textContent='1';
+    /* Mostrar modelo 3D del telescopio en el modal */
+    var host=document.getElementById('pm-canvas-host');
+    host.innerHTML='';
+    var cw=document.getElementById('canvas-'+id);
+    if(cw){
+      pmCanvasRef={el:cw,parent:cw.parentElement,next:cw.nextSibling};
+      host.appendChild(cw);
+      setTimeout(function(){window.dispatchEvent(new Event('resize'))},80);
+    }
+    var bd=document.getElementById('pm-backdrop');
+    bd.classList.add('is-open');bd.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  function closePM(){
+    if(pmCanvasRef){
+      var ref=pmCanvasRef;
+      ref.parent.insertBefore(ref.el,ref.next||null);
+      setTimeout(function(){window.dispatchEvent(new Event('resize'))},80);
+      pmCanvasRef=null;
+    }
+    var bd=document.getElementById('pm-backdrop');
+    bd.classList.remove('is-open');bd.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';pmId=null;pmQty=1;
+  }
+
+  /* CART DRAWER */
+  function openCart(){
+    renderCart();
+    var bd=document.getElementById('cart-backdrop');
+    bd.classList.add('is-open');bd.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';
+  }
+
+  function closeCart(){
+    var bd=document.getElementById('cart-backdrop');
+    bd.classList.remove('is-open');bd.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+
+  /* Expose for inline onclick */
+  window.__ee={rm:removeFromCart,chg:changeQty};
+
+  /* EVENT LISTENERS */
+  document.querySelectorAll('[data-product]').forEach(function(btn){
+    btn.addEventListener('click',function(e){e.preventDefault();openPM(this.dataset.product)});
+  });
+
+  document.getElementById('pm-close').addEventListener('click',closePM);
+  document.getElementById('pm-backdrop').addEventListener('click',function(e){if(e.target===this)closePM()});
+
+  document.getElementById('pm-qty-minus').addEventListener('click',function(){
+    if(pmQty>1){pmQty--;document.getElementById('pm-qty-val').textContent=pmQty}
+  });
+  document.getElementById('pm-qty-plus').addEventListener('click',function(){
+    pmQty++;document.getElementById('pm-qty-val').textContent=pmQty;
+  });
+
+  document.getElementById('pm-add-btn').addEventListener('click',function(){
+    if(pmId){addToCart(pmId,pmQty);closePM();openCart()}
+  });
+
+  document.getElementById('nav-cart').addEventListener('click',openCart);
+  document.getElementById('cart-close').addEventListener('click',closeCart);
+  document.getElementById('cart-keep-btn').addEventListener('click',closeCart);
+  document.getElementById('cart-backdrop').addEventListener('click',function(e){if(e.target===this)closeCart()});
+  document.getElementById('cart-empty-shop').addEventListener('click',function(){
+    closeCart();
+    var s=document.getElementById('products');if(s)s.scrollIntoView({behavior:'smooth'});
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    if(document.getElementById('pm-backdrop').classList.contains('is-open'))closePM();
+    else if(document.getElementById('cart-backdrop').classList.contains('is-open'))closeCart();
+  });
+
+  updateBadge();
+  renderCart();
+})();
+</script>
+<div id="scope-store" aria-hidden="true">
+  <div class="scope-canvas-wrap" id="canvas-cosmos"></div>
+  <div class="scope-canvas-wrap" id="canvas-nova"></div>
+  <div class="scope-canvas-wrap" id="canvas-apex"></div>
+  <div class="scope-canvas-wrap" id="canvas-zenith"></div>
+  <div class="scope-canvas-wrap" id="canvas-stellar"></div>
+</div>
 </body>
 </html>
